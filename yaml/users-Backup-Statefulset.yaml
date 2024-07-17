@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-backup
+spec:
+  selector:
+    matchLabels:
+      app: mongo-backup
+  serviceName: "mongo-backup"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongo-backup
+    spec:
+      containers:
+      - name: mongo-backup
+        image: tranxi/mongo-backup-v4
+        volumeMounts:
+        - name: backup-storage
+          mountPath: /backup
+  volumeClaimTemplates:
+  - metadata:
+      name: backup-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "gp2"
+      resources:
+        requests:
+          storage: 10Gi

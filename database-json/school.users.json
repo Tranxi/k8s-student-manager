@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "6690fd387719b0e8b7af584c"
+  },
+  "role": "admin",
+  "username": "admin",
+  "password": "password"
+},
+{
+  "_id": {
+    "$oid": "6690fd657719b0e8b7af584e"
+  },
+  "role": "teacher",
+  "username": "teacher",
+  "password": "123"
+},
+{
+  "_id": {
+    "$oid": "6690fd767719b0e8b7af5850"
+  },
+  "role": "student",
+  "username": "student",
+  "password": "123"
+}]

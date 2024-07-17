@@ -1,0 +1,31 @@
+<!-- main page of teacher -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Success</title>
+</head>
+<body>
+    <h1>Teacher Success Page</h1>
+    <p>Welcome, Teacher!</p>
+
+    <!-- modify the score -->
+    <form action="/teacher/update-grade" method="POST">
+        <div>
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+        </div>
+        <div>
+            <label for="courseName">Course Name:</label>
+            <input type="text" id="courseName" name="courseName" required>
+        </div>
+        <div>
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" required>
+        </div>
+        <button type="submit">Update Grade</button>
+    </form>
+
+</body>
+</html>

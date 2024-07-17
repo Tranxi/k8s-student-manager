@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-course
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-course
+  template:
+    metadata:
+      labels:
+        app: mongo-course
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:4.4.6
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-course-pvc  # reference a previously defined pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-course-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp2  # gp2 type EBS storage class
+  resources:
+    requests:
+      storage: 10Gi  
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-course
+spec:
+  selector:
+    app: mongo-course
+  ports:
+    - protocol: TCP
+      port: 27018 # avoid port confliction
+      targetPort: 27017

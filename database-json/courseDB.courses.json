@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "66938b0d105418f15b2daa8c"
+  },
+  "courseName": "Computer Network",
+  "students": [
+    {
+      "username": "Alan",
+      "grade": "A"
+    },
+    {
+      "username": "Bob",
+      "grade": "B"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6695cdc719eebb37357f0af9"
+  },
+  "courseName": "Operating System",
+  "students": [
+    {
+      "grade": "A+",
+      "username": "Alan"
+    },
+    {
+      "grade": "A-",
+      "username": "student"
+    }
+  ]
+}]

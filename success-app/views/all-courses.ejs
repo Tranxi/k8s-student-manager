@@ -1,0 +1,18 @@
+<!-- the page showing all the courses -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>all courses</title>
+</head>
+<body>
+    <h1>all courses</h1>
+    <ul>
+        <% courses.forEach(function(course) { %>
+            <li><%= course.courseName %></li>
+        <% }); %>
+    </ul>
+    <a href="/success?role=admin">Return to Admin Page</a>
+</body>
+</html>
+

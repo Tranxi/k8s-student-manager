@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: login-app
+  template:
+    metadata:
+      labels:
+        app: login-app
+    spec:
+      containers:
+        - name: login-app
+          image: tranxi/login-app:v1.1
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-username
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-password
+            - name: SUCCESS_SERVICE_URL # replace this URL with the external DNS address of the success-service loadBalancer in the cluster.
+              value: "http://adcf8f76b763440d487471c3d7ea7533-283813955.us-east-1.elb.amazonaws.com/success" 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: login-app-service
+spec:
+  selector:
+    app: login-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer  

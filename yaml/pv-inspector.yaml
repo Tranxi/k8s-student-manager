@@ -1,0 +1,17 @@
+# A temporary pod to view the contents of the PV to verify if the database backup was successful.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pv-inspector
+spec:
+  volumes:
+    - name: pv-volume
+      persistentVolumeClaim:
+        claimName: course-backup-pvc #  back up of courseDB
+  containers:
+    - name: pv-inspector-container
+      image: busybox
+      command: ["sleep", "3600"]  # keeps the container running for 1 hour
+      volumeMounts:
+        - mountPath: "/mnt/pv"
+          name: pv-volume

@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mongo-course-backup
+spec:
+  schedule: "0 2 * * *"  # run at 2 AM every day
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: course-backup
+            image: tranxi/course-backup
+            volumeMounts:
+            - name: course-backup-storage
+              mountPath: /backup
+          restartPolicy: OnFailure
+          volumes:
+          - name: course-backup-storage
+            persistentVolumeClaim:
+              claimName: course-backup-pvc
