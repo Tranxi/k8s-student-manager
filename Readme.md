@@ -65,9 +65,21 @@ pod named **mongo-course-xxx** runs the course-database.
 
 1. enter the pod
 ``kubectl exec -it mongo-xxx -- sh``
-2. connect to the database inside the pod
+2. create an administrator account in MongoDB
+``mongo`` // connect to database directly
+// inside the mongoDB (Command line starts with **#**)
+``use admin``
+// create user
+``db.createUser({
+  user: "admin",
+  pwd: "password",
+  roles: [ { role: "root", db: "admin" } ]
+})``
+// exit
+``exit``
+3. connect to the database inside the pod with authentication
 ``mongo -u admin -p password --authenticationDatabase admin``
-3. insert entries
+4. insert entries
 ``use school;``
 ``db.createCollection('users');``
 ``db.users.insertMany([
@@ -95,8 +107,19 @@ pod named **mongo-course-xxx** runs the course-database.
 
 ##### course-DB
 
+similar steps
 ``kubectl exec -it mongo-course-xxx -- sh``
-
+// create user
+``mongo``
+``use admin``
+``db.createUser({
+  user: "admin",
+  pwd: "password",
+  roles: [ { role: "root", db: "admin" } ]
+})``
+//exit
+``exit``
+// connect with authentication
 ``mongo -u admin -p password --authenticationDatabase admin``
 
 ``use courseDB;``
@@ -150,8 +173,11 @@ pod named **mongo-course-xxx** runs the course-database.
 
 ##### Deploy the applications in kubernetes cluster
 
-``kubectl apply -f login.yaml``
 ``kubectl apply -f succcess.yaml``
+get the external address of success-service, modify the login.yaml mannually.
+``kubectl get service``
+modify the **SUCCESS_SERVICE_URL** in login.yaml
+``kubectl apply -f login.yaml``
 
 #### 6. Deploy the backup CronJob
 
@@ -175,7 +201,7 @@ You can enter the pod and list the content below the directory /mnt/pv
 ## Configuration
 
 - In login.yaml, replace the env variable **SUCCESS_SERVICE_URL** with your success-service external-ip.
-- modify the secret.yaml to set the authentication method for your database
+- modify the secret.yaml to set the authentication method for your database.
 
 ---
 

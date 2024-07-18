@@ -22,7 +22,7 @@ const url = `mongodb://${username}:${password}@mongo:27017/?authSource=admin`;
 
 
 // After clicking the login button, if authenticating successfully, the page will jump to the following URL
-const successServiceUrl = process.env.SUCCESS_SERVICE_URL || 'http://adcf8f76b763440d487471c3d7ea7533-283813955.us-east-1.elb.amazonaws.com/success';
+const successServiceUrl = process.env.SUCCESS_SERVICE_URL;
 
 const dbName = 'school';
 

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: login-app
-          image: tranxi/login-app:v1.1
+          image: tranxi/login-app:v1.2
           ports:
             - containerPort: 3000
           env:
