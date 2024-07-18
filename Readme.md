@@ -25,6 +25,7 @@ The system leverages Kubernetes for scalable deployment and management of its mi
 
 - You need an AWS EKS (Elastic Kubernetes Service) cluster set up.
 - Ensure kubectl is configured to communicate with your AWS EKS cluster
+- Adds on EBS to your EKS group.
 
 #### Note
 

@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: mongo-course-backup
 spec:
-  schedule: "0 2 * * *"  # run at 2 AM every day
+  schedule: "0 2 * * *"  # cron expression run at 2 AM(us-east-1) every day
   jobTemplate:
     spec:
       template:
